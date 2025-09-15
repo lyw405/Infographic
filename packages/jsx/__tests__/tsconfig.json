@@ -9,7 +9,6 @@
     "paths": {
       "@antv/infographic-jsx": ["../src/index"],
       "@antv/infographic-jsx/*": ["../src/*"],
-      "@/*": ["../src/*"],
       "@@/*": ["./*"]
     }
   },

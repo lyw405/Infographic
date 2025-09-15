@@ -1,5 +1,5 @@
+import type { Bounds, JSXElement } from '@antv/infographic-jsx';
 import { describe, expect, it } from 'vitest';
-import type { Bounds, JSXElement } from '../../../src/types';
 import {
   getCombinedBounds,
   getElementBounds,

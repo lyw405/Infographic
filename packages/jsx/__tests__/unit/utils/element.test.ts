@@ -1,5 +1,9 @@
-import type { JSXElement, JSXNode, RenderableNode } from '@/types';
-import { nodeToElements, nodeToRenderableNodes } from '@/utils/element';
+import { nodeToElements, nodeToRenderableNodes } from '../../../src/utils';
+import type {
+  JSXElement,
+  JSXNode,
+  RenderableNode,
+} from '@antv/infographic-jsx';
 import { Fragment } from '@antv/infographic-jsx';
 import { describe, expect, it } from 'vitest';
 

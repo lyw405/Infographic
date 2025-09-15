@@ -1,12 +1,19 @@
 /** @jsxImportSource @antv/infographic-jsx */
+import type { Bounds } from '@antv/infographic-jsx';
+import {
+  cloneElement,
+  Ellipse,
+  Group,
+  Path,
+  Rect,
+  Text,
+} from '@antv/infographic-jsx';
 import { describe, expect, it } from 'vitest';
-import { cloneElement, Ellipse, Group, Path, Rect, Text } from '../../../src';
-import type { Bounds } from '../../../src/types';
 import {
   getCombinedBounds,
   getElementBounds,
   getElementsBounds,
-} from '../../../src/utils/bounds';
+} from '../../../src/utils';
 
 describe('bounds utils', () => {
   describe('getElementBounds', () => {
