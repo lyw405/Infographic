@@ -1,0 +1,12 @@
+{
+  "name": "dev",
+  "private": true,
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "vite-node ./src/main.tsx"
+  },
+  "dependencies": {
+    "@antv/infographic": "workspace:*",
+    "@antv/infographic-jsx": "workspace:*"
+  }
+}

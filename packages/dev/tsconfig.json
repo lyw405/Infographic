@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "types": ["node"],
+    "paths": {
+      "@antv/infographic": ["../infographic/src"],
+      "@antv/infographic/*": ["../infographic/src/*"],
+      "@antv/infographic-jsx": ["../jsx/src"],
+      "@antv/infographic-jsx/*": ["../jsx/src/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"],
+  "references": [{ "path": "../infographic" }, { "path": "../jsx" }]
+}
