@@ -12,9 +12,8 @@ export interface BaseItemProps {
   [key: string]: any;
 }
 
-export interface ItemOptions {
+export interface ItemOptions extends Partial<BaseItemProps> {
   coloredArea?: ('icon' | 'label' | 'desc' | 'value')[];
-  [key: string]: any;
 }
 
 export interface Item<T extends BaseItemProps = BaseItemProps> {
