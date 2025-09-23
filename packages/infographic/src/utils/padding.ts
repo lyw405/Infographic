@@ -1,6 +1,7 @@
 import type { Padding, ParsedPadding } from '../types';
 
-export function parsePadding(padding: Padding): ParsedPadding {
+export function parsePadding(padding: Padding | undefined): ParsedPadding {
+  if (!padding) return [0, 0, 0, 0];
   if (typeof padding === 'number') {
     return [padding, padding, padding, padding];
   }
