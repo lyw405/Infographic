@@ -68,7 +68,7 @@ export const CircularProgress: ComponentType<CircularProgressProps> = (
         height={d}
         fontSize={24}
         fontWeight="bold"
-        fill={themeColors.colorText}
+        fill={themeColors.colorPrimary}
         alignHorizontal="center"
         alignVertical="center"
       >

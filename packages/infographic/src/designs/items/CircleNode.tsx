@@ -59,7 +59,7 @@ export const CircleNode: ComponentType<CircleNodeProps> = (props) => {
         height={labelSize}
         alignHorizontal="center"
         alignVertical="center"
-        fill={themeColors.colorPrimary}
+        fill={themeColors.colorPrimaryText}
       >
         {datum.label}
       </ItemLabel>

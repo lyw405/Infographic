@@ -3,7 +3,7 @@ import { ComponentType, Group, Rect } from '@antv/infographic-jsx';
 import { ItemLabel } from '../components';
 import { registerItem } from './registry';
 import type { BaseItemProps } from './types';
-import { getItemProps } from './utils';
+import { getItemId, getItemProps } from './utils';
 
 export interface RoundedRectNodeProps extends BaseItemProps {
   width?: number;
@@ -28,15 +28,16 @@ export const RoundedRectNode: ComponentType<RoundedRectNodeProps> = (props) => {
   const borderRadius = height / 2;
 
   // Calculate text positioning
-  const textX = padding;
+  const textX = borderRadius;
   const textY = padding;
-  const textWidth = width - padding * 2;
+  const textWidth = width - borderRadius * 2;
   const textHeight = height - padding * 2;
 
   return (
     <Group {...restProps}>
       {/* Rounded rectangle background */}
       <Rect
+        id={getItemId(indexes, 'shape-rect')}
         width={width}
         height={height}
         rx={borderRadius}
@@ -64,7 +65,7 @@ export const RoundedRectNode: ComponentType<RoundedRectNodeProps> = (props) => {
         alignVertical="center"
         fontSize={14}
         fontWeight="500"
-        fill={themeColors.colorText}
+        fill={themeColors.colorPrimaryText}
       >
         {datum.label}
       </ItemLabel>

@@ -27,25 +27,35 @@ export const PillBadge: ComponentType<PillBadgeProps> = (props) => {
     },
     restProps,
   ] = getItemProps(props, ['width', 'pillWidth', 'pillHeight', 'gap']);
+
+  // Optimize: when no description, use pillWidth as component width
+  const hasDesc = !!datum.desc;
+  const componentWidth = hasDesc ? width : pillWidth;
+
   // Calculate pill position based on alignment
-  const pillX =
-    positionH === 'center'
-      ? (width - pillWidth) / 2
+  const pillX = hasDesc
+    ? positionH === 'center'
+      ? (componentWidth - pillWidth) / 2
       : positionH === 'flipped'
-        ? width - pillWidth
-        : 0;
+        ? componentWidth - pillWidth
+        : 0
+    : 0; // Always 0 when no description
 
   const pillY = 0;
 
-  // Calculate content position
-  const contentX = positionH === 'center' ? 0 : positionH === 'flipped' ? 0 : 0;
-
+  // Calculate content position (only needed when hasDesc is true)
+  const contentX = hasDesc
+    ? positionH === 'center'
+      ? 0
+      : positionH === 'flipped'
+        ? 0
+        : 0
+    : 0;
   const contentY = pillHeight + gap;
-  const contentWidth = width;
+  const contentWidth = componentWidth;
 
   const dropShadowId = `drop-shadow-${themeColors.colorPrimary}`;
   const linearGradientId = `linear-gradient-white-top-bottom`;
-
   return (
     <Group {...restProps}>
       <Defs>

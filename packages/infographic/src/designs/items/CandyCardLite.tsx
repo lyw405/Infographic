@@ -70,7 +70,14 @@ export const CandyCardLite: ComponentType<CandyCardLiteProps> = (props) => {
       </ItemDesc>
 
       {/* 右上角插图区域 */}
-      <ItemIcon indexes={indexes} x={width - 50} y={5} width={44} height={44} />
+      <ItemIcon
+        indexes={indexes}
+        x={width - 50}
+        y={5}
+        width={44}
+        height={44}
+        fill={themeColors.colorPrimary}
+      />
     </Group>
   );
 };

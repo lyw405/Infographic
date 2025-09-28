@@ -78,7 +78,7 @@ export const IconBadge: ComponentType<IconBadgeProps> = (props) => {
         x={(size - iconSize) / 2}
         y={(size - iconSize) / 2}
         size={iconSize}
-        fill={themeColors.colorWhite}
+        fill={themeColors.colorPrimaryText}
       />
 
       {/* 数值徽章 */}
