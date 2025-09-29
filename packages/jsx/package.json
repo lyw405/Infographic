@@ -1,6 +1,6 @@
 {
   "name": "@antv/infographic-jsx",
-  "version": "0.0.1-beta.2",
+  "version": "0.0.1-beta.3",
   "description": "JSX runtime for AntV Infographic",
   "keywords": [
     "antv",
@@ -44,6 +44,6 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/",
-    "tag": "beta"
+    "tag": "latest"
   }
 }
