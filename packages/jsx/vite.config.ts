@@ -1,6 +1,9 @@
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
+const format = process.env.MODULE === 'esm' ? 'es' : 'cjs';
+const outDir = format === 'es' ? 'esm' : 'lib';
+
 export default defineConfig({
   build: {
     lib: {
@@ -8,7 +11,7 @@ export default defineConfig({
         index: resolve(__dirname, 'src/index.ts'),
         'jsx-runtime': resolve(__dirname, 'src/jsx-runtime.ts'),
       },
-      formats: ['es'],
+      formats: [format],
       fileName: (format, entryName) => `${entryName}.js`,
     },
     rollupOptions: {
@@ -32,7 +35,7 @@ export default defineConfig({
     minify: 'esbuild',
     sourcemap: false,
     target: 'es2020',
-    outDir: 'dist',
+    outDir: outDir,
     emptyOutDir: true,
   },
   esbuild: {

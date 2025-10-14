@@ -1,5 +1,7 @@
 node_modules
 dist
+esm
+lib
 tsconfig.tsbuildinfo
 
 pnpm-lock.yaml

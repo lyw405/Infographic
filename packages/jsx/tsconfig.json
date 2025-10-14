@@ -4,11 +4,11 @@
     "rootDir": "./src",
     "jsx": "react-jsx",
     "jsxImportSource": ".",
-    "outDir": "./dist",
+    "outDir": "./esm",
     "composite": true,
     "declaration": true,
     "declarationMap": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "lib", "esm"]
 }

@@ -3,17 +3,16 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": "./src",
-    "outDir": "./dist",
+    "outDir": "./esm",
     "jsx": "react-jsx",
     "types": ["node"],
     "composite": true,
     "paths": {
-      "@antv/infographic-jsx": ["../jsx/src"],
-      "@antv/infographic-jsx/*": ["../jsx/src/*"],
-      "@antv/infographic": ["./src/index"]
+      "@antv/infographic-jsx": ["../jsx/esm"],
+      "@antv/infographic-jsx/*": ["../jsx/esm/*"]
     }
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "../jsx/**/*"],
-  "references": [{ "path": "../jsx" }]
+  "exclude": ["node_modules", "dist", "lib", "esm"],
+  "references": []
 }

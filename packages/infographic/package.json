@@ -9,33 +9,39 @@
   ],
   "license": "MIT",
   "author": "Aarebecca",
-  "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": "./esm/index.js",
+      "require": "./lib/index.js",
+      "types": "./esm/index.d.ts"
     },
     "./jsx-runtime": {
-      "import": "./dist/jsx-runtime.js",
-      "types": "./dist/jsx-runtime.d.ts"
+      "import": "./esm/jsx-runtime.js",
+      "require": "./lib/jsx-runtime.js",
+      "types": "./esm/jsx-runtime.d.ts"
     },
     "./jsx-dev-runtime": {
-      "import": "./dist/jsx-runtime.js",
-      "types": "./dist/jsx-runtime.d.ts"
+      "import": "./esm/jsx-runtime.js",
+      "require": "./lib/jsx-runtime.js",
+      "types": "./esm/jsx-runtime.d.ts"
     }
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./lib/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
   "files": [
-    "dist",
+    "lib",
+    "esm",
     "src"
   ],
   "scripts": {
-    "build": "tsc -b -f tsconfig.json",
+    "build": "run-s clean build:esm build:cjs",
+    "build:cjs": "tsc --module commonjs --outDir lib",
+    "build:esm": "tsc --module ESNext --outDir esm",
     "build:watch": "tsc -p tsconfig.json --watch",
     "check:test": "tsc --noEmit -p __tests__",
     "ci": "run-s test build lint",
+    "clean": "rm -rf esm lib tsconfig.tsbuildinfo",
     "lint": "eslint . --ext .ts,.tsx && npm run check:test",
     "test": "vitest --run --coverage"
   },
