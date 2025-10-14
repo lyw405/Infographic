@@ -8,9 +8,7 @@ export const getPaletteColor = (
 ) => {
   const palette = typeof args === 'string' ? getPalette(args) || [] : args;
   if (palette.length === 0) return;
-
-  // TODO 待完善取色逻辑
-  const index = indexes[1] || indexes[0] || 0;
+  const index = indexes[0] || 0;
 
   if (Array.isArray(palette)) {
     return palette[index % palette.length] as string;
