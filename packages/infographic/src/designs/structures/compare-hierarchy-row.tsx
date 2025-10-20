@@ -11,6 +11,7 @@ export interface CompareHierarchyRowProps extends BaseStructureProps {
   gap?: number;
   itemGap?: number;
   columnWidth?: number;
+  itemPadding?: number;
   showColumnBackground?: boolean;
   columnBackgroundAlpha?: number;
 }
@@ -30,6 +31,7 @@ export const CompareHierarchyRow: ComponentType<CompareHierarchyRowProps> = (
     gap = 0,
     itemGap = 20,
     columnWidth = 280,
+    itemPadding = 5,
     showColumnBackground = true,
     columnBackgroundAlpha = 0.08,
     options,
@@ -43,6 +45,8 @@ export const CompareHierarchyRow: ComponentType<CompareHierarchyRowProps> = (
   const itemElements: JSXElement[] = [];
   const btnElements: JSXElement[] = [];
 
+  const childItemWidth = columnWidth - itemPadding * 2;
+
   const rootItemBounds = getElementBounds(
     <RootItem indexes={[0]} data={data} datum={items[0]} width={columnWidth} />,
   );
@@ -51,7 +55,7 @@ export const CompareHierarchyRow: ComponentType<CompareHierarchyRowProps> = (
       indexes={[0, 0]}
       data={data}
       datum={items[0]?.children?.[0] || {}}
-      width={columnWidth}
+      width={childItemWidth}
     />,
   );
 
@@ -70,7 +74,8 @@ export const CompareHierarchyRow: ComponentType<CompareHierarchyRowProps> = (
   items.forEach((rootItem, rootIndex) => {
     const { children = [] } = rootItem;
 
-    const rootX = rootIndex * (rootItemBounds.width + gap);
+    const columnX = rootIndex * (columnWidth + gap);
+    const rootX = columnX;
     const rootY = 0;
 
     if (showColumnBackground) {
@@ -81,9 +86,9 @@ export const CompareHierarchyRow: ComponentType<CompareHierarchyRowProps> = (
 
       itemElements.push(
         <Rect
-          x={rootX}
+          x={columnX}
           y={rootY}
-          width={rootItemBounds.width}
+          width={columnWidth}
           height={columnHeight}
           fill={bgColor}
           rx={0}
@@ -126,6 +131,7 @@ export const CompareHierarchyRow: ComponentType<CompareHierarchyRowProps> = (
     children.forEach((child, childIndex) => {
       const childY =
         childStartY + childIndex * (childItemBounds.height + itemGap);
+      const childX = rootX + itemPadding;
       const indexes = [rootIndex, childIndex];
 
       itemElements.push(
@@ -133,16 +139,16 @@ export const CompareHierarchyRow: ComponentType<CompareHierarchyRowProps> = (
           indexes={indexes}
           datum={child}
           data={data}
-          x={rootX}
+          x={childX}
           y={childY}
-          width={columnWidth}
+          width={childItemWidth}
         />,
       );
 
       btnElements.push(
         <BtnRemove
           indexes={indexes}
-          x={rootX + rootItemBounds.width - btnBounds.width - 10}
+          x={childX + childItemBounds.width - btnBounds.width - 10}
           y={childY + (childItemBounds.height - btnBounds.height) / 2}
         />,
       );
@@ -151,12 +157,14 @@ export const CompareHierarchyRow: ComponentType<CompareHierarchyRowProps> = (
         btnElements.push(
           <BtnAdd
             indexes={[rootIndex, childIndex + 1]}
-            x={rootX + rootItemBounds.width / 2 - btnBounds.width / 2}
+            x={childX + childItemBounds.width / 2 - btnBounds.width / 2}
             y={childY + childItemBounds.height - btnBounds.height / 2}
           />,
         );
       }
     });
+
+    const childX = rootX + itemPadding;
 
     if (children.length > 0) {
       const lastChildY =
@@ -164,7 +172,7 @@ export const CompareHierarchyRow: ComponentType<CompareHierarchyRowProps> = (
       btnElements.push(
         <BtnAdd
           indexes={[rootIndex, children.length]}
-          x={rootX + rootItemBounds.width / 2 - btnBounds.width / 2}
+          x={childX + childItemBounds.width / 2 - btnBounds.width / 2}
           y={lastChildY - childItemBounds.height / 2 - btnBounds.height / 2}
         />,
       );
@@ -172,7 +180,7 @@ export const CompareHierarchyRow: ComponentType<CompareHierarchyRowProps> = (
       btnElements.push(
         <BtnAdd
           indexes={[rootIndex, 0]}
-          x={rootX + rootItemBounds.width / 2 - btnBounds.width / 2}
+          x={childX + childItemBounds.width / 2 - btnBounds.width / 2}
           y={childStartY - itemGap / 2 - btnBounds.height / 2}
         />,
       );
@@ -180,11 +188,11 @@ export const CompareHierarchyRow: ComponentType<CompareHierarchyRowProps> = (
   });
 
   if (items.length > 0) {
-    const lastRootX = items.length * (rootItemBounds.width + gap);
+    const lastColumnX = items.length * (columnWidth + gap);
     btnElements.push(
       <BtnAdd
         indexes={[items.length]}
-        x={lastRootX - gap / 2 - btnBounds.width / 2}
+        x={lastColumnX - gap / 2 - btnBounds.width / 2}
         y={-btnBounds.height - 5}
       />,
     );

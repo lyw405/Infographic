@@ -304,6 +304,20 @@ const BUILT_IN_TEMPLATES: Record<string, TemplateOptions> = {
       ],
     },
   },
+  'compare-hierarchy-row-letter-card-compact-card': {
+    design: {
+      title: 'default',
+      structure: { type: 'compare-hierarchy-row' },
+      items: [{ type: 'letter-card' }, { type: 'compact-card' }],
+    },
+  },
+  'compare-hierarchy-row-letter-card-rounded-rect-node': {
+    design: {
+      title: 'default',
+      structure: { type: 'compare-hierarchy-row' },
+      items: [{ type: 'letter-card' }, { type: 'rounded-rect-node' }],
+    },
+  },
 };
 Object.entries(BUILT_IN_TEMPLATES).forEach(([name, options]) => {
   registerTemplate(name, options);
