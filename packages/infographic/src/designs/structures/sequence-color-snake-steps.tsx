@@ -7,10 +7,9 @@ import {
   Path,
   Rect,
 } from '@antv/infographic-jsx';
-import { getPaletteColor } from '../../renderer';
 import { BtnAdd, BtnRemove, BtnsGroup, ItemsGroup } from '../components';
 import { FlexLayout } from '../layouts';
-import { getColorPrimary } from '../utils';
+import { getColorPrimary, getPaletteColor } from '../utils';
 import { registerStructure } from './registry';
 import type { BaseStructureProps } from './types';
 
@@ -124,16 +123,8 @@ export const SequenceColorSnakeSteps: ComponentType<
         const arcWidth = arcRadius * 2;
         const arcHeight = nextItemY - currentItemY;
 
-        const currentColor = getPaletteColor(
-          options.themeConfig?.palette,
-          indexes,
-          data.items.length,
-        );
-        const nextColor = getPaletteColor(
-          options.themeConfig?.palette,
-          [index + 1],
-          data.items.length,
-        );
+        const currentColor = getPaletteColor(options, indexes);
+        const nextColor = getPaletteColor(options, [index + 1]);
         const linearGradientId = `gradient-arc-${index}`;
 
         decorElements.push(
@@ -196,11 +187,7 @@ export const SequenceColorSnakeSteps: ComponentType<
   // Add left rectangle bar for the first item when there's an arc on the left side
   if (items.length / itemsPerRow > 2) {
     const arcRadius = (rowGap + itemBounds.height) / 2;
-    const firstItemColor = getPaletteColor(
-      options.themeConfig?.palette,
-      [0],
-      data.items.length,
-    );
+    const firstItemColor = getPaletteColor(options, [0]);
 
     decorElements.push(
       <Rect

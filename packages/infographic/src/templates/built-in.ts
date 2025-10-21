@@ -360,6 +360,27 @@ const BUILT_IN_TEMPLATES: Record<string, TemplateOptions> = {
       items: [{ type: 'horizontal-icon-line' }],
     },
   },
+  'list-sector-simple': {
+    design: {
+      title: 'default',
+      structure: { type: 'list-sector' },
+      items: [{ type: 'simple' }],
+    },
+  },
+  'list-sector-plain-text': {
+    design: {
+      title: 'default',
+      structure: { type: 'list-sector' },
+      items: [{ type: 'plain-text' }],
+    },
+  },
+  'list-sector-half-plain-text': {
+    design: {
+      title: 'default',
+      structure: { type: 'list-sector', startAngle: -180, endAngle: 0 },
+      items: [{ type: 'plain-text' }],
+    },
+  },
 };
 
 Object.entries(BUILT_IN_TEMPLATES).forEach(([name, options]) => {

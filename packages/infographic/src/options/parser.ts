@@ -112,23 +112,20 @@ function parseDesignItem(
       const { indexes } = props;
       const { data, themeConfig } = options;
       const background = themeConfig?.colorBg || '#fff';
-      const themeColors =
-        'themeColors' in props
-          ? props.themeColors
-          : generateColors(
-              getPaletteColor(
-                themeConfig?.palette,
-                indexes,
-                data?.items?.length,
-              ) ||
-                themeConfig?.colorPrimary ||
-                '#1677FF',
-              background,
-            );
+
+      const {
+        themeColors = generateColors(
+          getPaletteColor(themeConfig?.palette, indexes, data?.items?.length) ||
+            themeConfig?.colorPrimary ||
+            '#1677FF',
+          background,
+        ),
+        ...restProps
+      } = props;
 
       return component({
-        ...props,
         themeColors,
+        ...restProps,
         ...userProps,
         id: `item-${getItemKeyFromIndexes(indexes)}`,
       });

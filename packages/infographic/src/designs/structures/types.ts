@@ -6,7 +6,10 @@ import type { BaseItemProps } from '../items';
 
 export interface BaseStructureProps {
   Title?: ComponentType<Pick<TitleProps, 'title' | 'desc'>>;
-  Item: ComponentType<Omit<BaseItemProps, 'themeColors'>>; // themeColors will be injected
+  Item: ComponentType<
+    Omit<BaseItemProps, 'themeColors'> &
+      Partial<Pick<BaseItemProps, 'themeColors'>>
+  >;
   Items: ComponentType<Omit<BaseItemProps, 'themeColors'>>[];
   data: Data;
   options: ParsedInfographicOptions;

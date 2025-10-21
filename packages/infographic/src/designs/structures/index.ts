@@ -7,6 +7,7 @@ export * from './hierarchy-tree';
 export * from './list-column';
 export * from './list-grid';
 export * from './list-row';
+export * from './list-sector';
 export * from './list-waterfall';
 export * from './registry';
 export * from './relation-circle';
