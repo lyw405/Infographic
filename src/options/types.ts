@@ -1,5 +1,6 @@
-import { DesignOptions, ParsedDesignsOptions } from '../designs';
-import { ThemeConfig } from '../themes';
+import type { DesignOptions, ParsedDesignsOptions } from '../designs';
+import type { ElementProps, IInteraction, IPlugin } from '../editor';
+import type { ThemeConfig } from '../themes';
 import type { Data, Padding } from '../types';
 
 export interface InfographicOptions {
@@ -23,6 +24,15 @@ export interface InfographicOptions {
   themeConfig?: ThemeConfig;
   /** svg 容器上的配置 */
   svg?: SVGOptions;
+
+  /** 启用编辑 */
+  editable?: boolean;
+  /** 启用插件 */
+  plugins?: IPlugin[];
+  /** 启用交互 */
+  interactions?: IInteraction[];
+  /** 用于向画布添加图形 */
+  elements?: ElementProps[];
 }
 
 export interface ParsedInfographicOptions {
@@ -37,6 +47,11 @@ export interface ParsedInfographicOptions {
   theme?: string;
   themeConfig: ThemeConfig;
   svg?: SVGOptions;
+
+  editable?: boolean;
+  plugins?: IPlugin[];
+  interactions?: IInteraction[];
+  shapes?: ElementProps[];
 }
 
 interface SVGOptions {

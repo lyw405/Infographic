@@ -1,5 +1,7 @@
+export * from './attrs';
 export * from './color';
 export * from './data';
+export * from './element';
 export * from './font';
 export * from './get-types';
 export * from './icon';
@@ -7,6 +9,7 @@ export * from './item';
 export * from './join';
 export * from './padding';
 export * from './recognizer';
+export * from './style';
 export * from './svg';
 export * from './text';
 export * from './uuid';

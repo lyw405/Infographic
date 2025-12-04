@@ -1,7 +1,10 @@
+import EventEmitter from 'eventemitter3';
+import { cloneDeep } from 'lodash-es';
+import { Editor, type IEditor } from '../editor';
 import {
-  ExportOptions,
   exportToPNGString,
   exportToSVGString,
+  type ExportOptions,
 } from '../exporter';
 import { renderSVG } from '../jsx';
 import {
@@ -10,15 +13,33 @@ import {
   parseOptions,
 } from '../options';
 import { Renderer } from '../renderer';
+import { IEventEmitter } from '../types';
 import { getTypes, parseSVG } from '../utils';
+import { DEFAULT_OPTIONS } from './options';
 
 export class Infographic {
+  rendered: boolean = false;
+
+  private emitter: IEventEmitter = new EventEmitter();
+
   private node: SVGSVGElement | null = null;
 
+  private editor?: IEditor;
+
+  private options: InfographicOptions;
   private parsedOptions: ParsedInfographicOptions;
 
-  constructor(private options: InfographicOptions) {
-    this.parsedOptions = parseOptions(this.options);
+  constructor(options: InfographicOptions) {
+    this.options = {
+      ...options,
+      data: cloneDeep(options.data),
+      elements: cloneDeep(options.elements || []),
+    };
+    this.parsedOptions = parseOptions({ ...DEFAULT_OPTIONS, ...this.options });
+  }
+
+  getOptions() {
+    return this.options;
   }
 
   /**
@@ -28,9 +49,14 @@ export class Infographic {
     const { container } = this.parsedOptions;
     const template = this.compose();
     const renderer = new Renderer(this.parsedOptions, template);
-
     this.node = renderer.render();
     container.replaceChildren(this.node);
+    if (this.options.editable) {
+      this.editor = new Editor(this.emitter, this.node, this.parsedOptions);
+    }
+
+    this.rendered = true;
+    this.emitter.emit('rendered', { node: this.node, options: this.options });
   }
 
   /**
@@ -85,8 +111,20 @@ export class Infographic {
     return await exportToPNGString(this.node, options);
   }
 
+  on(event: string, listener: (...args: any[]) => void) {
+    this.emitter.on(event, listener);
+  }
+
+  off(event: string, listener: (...args: any[]) => void) {
+    this.emitter.off(event, listener);
+  }
+
   destroy() {
+    this.editor?.destroy();
     this.node?.remove();
     this.node = null;
+    this.rendered = false;
+    this.emitter.emit('destroyed');
+    this.emitter.removeAllListeners();
   }
 }

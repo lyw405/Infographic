@@ -3,8 +3,8 @@ import {
   getAttributes,
   parseSVG,
   setAttributes,
+  setElementRole,
 } from '../../utils';
-import { ElementTypeEnum } from '../constants';
 
 const ADD_ICON_ID = 'btn-add-icon';
 const REMOVE_ICON_ID = 'btn-remove-icon';
@@ -22,8 +22,10 @@ export function renderButtonsGroup(svg: SVGSVGElement, group: SVGGElement) {
   removeBtns.forEach(renderRemoveButton);
 }
 
+const btnIconDefRole = 'btn-icon-defs';
 function defineButtonIcon(svg: SVGSVGElement) {
-  const defs = createElement('defs', { id: 'btn-icon-defs' });
+  const defs = createElement('defs');
+  setElementRole(defs, btnIconDefRole);
 
   const addIconSymbol =
     parseSVG(`<symbol class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="200" height="200">
@@ -62,7 +64,6 @@ function renderButtonIcon(node: SVGElement, name: string) {
     id,
     class: 'btn-group',
     transform: `translate(${x}, ${y})`,
-    'data-element-type': ElementTypeEnum.Button,
   });
 
   const dataItems = node.getAttribute('data-items');
